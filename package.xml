@@ -48,7 +48,8 @@ from html forms. Features:
   
   BC break: classes split into separate files, PHP5 visibility added
   
-  Request #2487:  new methods addValidExtension() and hasValidExtension()
+  Request #2487 :  new methods addValidExtension() and hasValidExtension()
+  Request #19365:  add option to allow for multiple extensions on same file
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -114,7 +115,8 @@ from html forms. Features:
     
     BC break: classes split into separate files, PHP5 visibility added
     
-    Request #2487:  new methods addValidExtension() and hasValidExtension()
+    Request #2487 :  new methods addValidExtension() and hasValidExtension()
+    Request #19365:  add option to allow for multiple extensions on same file
    </notes>
   </release>
 

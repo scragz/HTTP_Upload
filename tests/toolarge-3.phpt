@@ -26,7 +26,7 @@ var_dump($file->getProp());
 Valid: bool(false)
 Missing: bool(false)
 Error: bool(true)
-array(8) {
+array(9) {
   ["real"]=>
   string(3) "10b"
   ["name"]=>
@@ -43,4 +43,7 @@ array(8) {
   string(0) ""
   ["error"]=>
   string(9) "TOO_LARGE"
+  ["extra_ext"]=>
+  array(0) {
+  }
 }

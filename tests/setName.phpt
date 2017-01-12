@@ -33,7 +33,7 @@ Error: bool(false)
 string(5) "my10b"
 MoveError: bool(false)
 string(5) "my10b"
-array(8) {
+array(9) {
   ["real"]=>
   string(3) "10b"
   ["name"]=>
@@ -50,5 +50,8 @@ array(8) {
   string(10) "text/plain"
   ["error"]=>
   NULL
+  ["extra_ext"]=>
+  array(0) {
+  }
 }
 bool(true)

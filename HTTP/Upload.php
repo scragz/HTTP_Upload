@@ -82,6 +82,13 @@ class HTTP_Upload extends HTTP_Upload_Error
     );
 
     /**
+     * Whether or not to consider multiple extensions
+     * e.g. file.txt.foo would have 'txt' and 'foo'
+     * @var bool
+     */
+    protected $_allowMultipleExtensions = false;
+
+    /**
      * PHP5 Constructor
      *
      * @param string $lang Language to use for reporting errors
@@ -117,6 +124,16 @@ class HTTP_Upload extends HTTP_Upload_Error
     }
 
     /**
+     * Whether or not to consider multiple extensions
+     * e.g. file.txt.foo would have 'txt' and 'foo'
+     * @param string $flag
+     */
+    public function allowMultipleFileExtensions($flag = true)
+    {
+        $this->_allowMultipleExtensions = (bool) $flag;
+    }
+
+    /**
      * Get files
      *
      * @param mixed $file If:
@@ -142,7 +159,7 @@ class HTTP_Upload extends HTTP_Upload_Error
                                                        '_error', null,
                                                        null, null,
                                                        null, $files_code,
-                                                       $this->lang, $this->_chmod);
+                                                       $this->lang, $this->_chmod, $this->_allowMultipleExtensions);
             } else {
                 $this->files = $files;
             }
@@ -169,7 +186,7 @@ class HTTP_Upload extends HTTP_Upload_Error
                                              '_error', null,
                                              null, null,
                                              null, 'DEV_NO_DEF_FILE',
-                                             $this->lang);
+                                             $this->lang, HTTP_UPLOAD_DEFAULT_CHMOD, $this->_allowMultipleExtensions);
                 return $huf;
             }
         }
@@ -231,7 +248,7 @@ class HTTP_Upload extends HTTP_Upload_Error
                     $type = $value['type'][$key];
                     $formname = $userfile . "[$key]";
                     $files[$formname] = new HTTP_Upload_File($name, $tmp_name,
-                                                             $formname, $type, $size, $error, $this->lang, $this->_chmod);
+                                                             $formname, $type, $size, $error, $this->lang, $this->_chmod, $this->_allowMultipleExtensions);
                 }
                 // One file
             } else {
@@ -247,7 +264,7 @@ class HTTP_Upload extends HTTP_Upload_Error
                 $type = $value['type'];
                 $formname = $userfile;
                 $files[$formname] = new HTTP_Upload_File($name, $tmp_name,
-                                                         $formname, $type, $size, $error, $this->lang, $this->_chmod);
+                                                         $formname, $type, $size, $error, $this->lang, $this->_chmod, $this->_allowMultipleExtensions);
             }
         }
         return $files;

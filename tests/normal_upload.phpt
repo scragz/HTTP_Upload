@@ -27,7 +27,7 @@ Valid: bool(true)
 Missing: bool(false)
 Error: bool(false)
 MoveError: bool(false)
-array(8) {
+array(9) {
   ["real"]=>
   string(3) "10b"
   ["name"]=>
@@ -44,5 +44,8 @@ array(8) {
   string(10) "text/plain"
   ["error"]=>
   NULL
+  ["extra_ext"]=>
+  array(0) {
+  }
 }
 bool(true)

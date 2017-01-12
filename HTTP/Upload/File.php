@@ -68,13 +68,15 @@ class HTTP_Upload_File extends HTTP_Upload_Error
      * @param   string  $size       size of the file
      * @param   string  $error      error on upload
      * @param   string  $lang       used language for errormessages
+     * @param   bool    $allowMulti allow for checking multiple extensions in same filename
      */
     public function __construct($name = null, $tmp = null,  $formname = null,
                               $type = null, $size = null, $error = null,
-                              $lang = null, $chmod = HTTP_UPLOAD_DEFAULT_CHMOD)
+                              $lang = null, $chmod = HTTP_UPLOAD_DEFAULT_CHMOD, $allowMulti = false)
     {
         parent::__construct($lang);
         $ext = null;
+        $extra_ext = array();
 
         if (empty($name)
             && ($error != 'TOO_LARGE' && $error != 'DEV_NO_DEF_FILE' && $size == 0)
@@ -86,6 +88,16 @@ class HTTP_Upload_File extends HTTP_Upload_Error
             // strpos needed to detect files without extension
             if (($pos = strrpos($name, '.')) !== false) {
                 $ext = substr($name, $pos + 1);
+
+                if ($allowMulti === true) {
+                    // check for multi extensions, e.g. foo.php.txt
+                    $base = substr($name, 0, $pos);
+                    while (($pos = strrpos($base, '.')) !== false) {
+                        $extra = substr($base, $pos + 1);
+                        $extra_ext[] = $extra;
+                        $base = substr($base, 0, $pos);
+                    }
+                }
             }
         }
 
@@ -111,7 +123,8 @@ class HTTP_Upload_File extends HTTP_Upload_Error
             'tmp_name'  => $tmp,
             'size'      => $size,
             'type'      => $type,
-            'error'     => $error
+            'error'     => $error,
+            'extra_ext' => $extra_ext,
         );
 
         $this->_chmod = $chmod;
@@ -124,9 +137,9 @@ class HTTP_Upload_File extends HTTP_Upload_Error
      */
     public function HTTP_Upload_File($name = null, $tmp = null,  $formname = null,
                               $type = null, $size = null, $error = null,
-                              $lang = null, $chmod = HTTP_UPLOAD_DEFAULT_CHMOD)
+                              $lang = null, $chmod = HTTP_UPLOAD_DEFAULT_CHMOD, $allowMulti = false)
     {
-        self::__construct($name, $tmp, $formname, $type, $size, $error, $lang, $chmod);
+        self::__construct($name, $tmp, $formname, $type, $size, $error, $lang, $chmod, $allowMulti);
     }
 
     /**
@@ -452,20 +465,30 @@ class HTTP_Upload_File extends HTTP_Upload_Error
     {
         $exts = $this->_extensionsCheck;
         settype($exts, 'array');
-        $ext = $this->getProp('ext');
+
+        $extensionsToCheck = array_merge(array($this->getProp('ext')), $this->getProp('extra_ext'));
+
         if (!$this->_extensionsCaseSensitive) {
-            $ext = strtolower($ext);
+            //$ext = strtolower($ext);
+            foreach($extensionsToCheck as $key => $extension) {
+                $extensionsToCheck[] = strtolower($extension);
+            }
         }
         if ($this->_extensionsMode == 'deny') {
-            if (in_array($ext, $exts)) {
-                return false;
+            foreach ($extensionsToCheck as $extension) {
+                if (in_array($extension, $exts)) {
+                    return false;
+                }
             }
+            return true;
         // mode == 'accept'
         } else {
-            if (!in_array($ext, $exts)) {
-                return false;
+            foreach ($extensionsToCheck as $extension) {
+                if (in_array($extension, $exts)) {
+                    return true;
+                }
             }
+            return false;
         }
-        return true;
     }
 }
