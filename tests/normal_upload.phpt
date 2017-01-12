@@ -4,7 +4,12 @@ test a normal file upload that succeeds
 userfile=files/10b
 --FILE--
 <?php
-require_once 'HTTP/Upload.php';
+error_reporting(E_ALL ^ E_STRICT);
+if (file_exists('vendor/autoload.php')) {
+    require_once 'vendor/autoload.php';
+} else {
+    require_once 'HTTP/Upload.php';
+}
 $up = new HTTP_Upload();
 $file = $up->getFiles('userfile');
 echo "Valid: ";   var_dump($file->isValid());

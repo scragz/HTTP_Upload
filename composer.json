@@ -32,11 +32,16 @@
         "source": "https://github.com/pear/HTTP_Upload"
     },
     "type": "library",
+    "repositories": [
+        {
+            "type": "pear",
+            "url": "https://pear.php.net"
+        }
+    ],
     "require": {
-        "pear/pear_exception": "*",
-        "pear/pear": "*"
+        "pear-pear.php.net/PEAR": "v1.10.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "@stable"
     }
 }

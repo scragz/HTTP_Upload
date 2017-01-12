@@ -1,7 +1,7 @@
 <?php
 // ********************************************** //
 // This software is licensed by the LGPL
-// -> http://www.gnu.org/copyleft/lesser.txt 
+// -> http://www.gnu.org/copyleft/lesser.txt
 // (c) 2001- 2004 by Tomas Von Veschler Cox //
 // ********************************************** //
 // $Id$
@@ -206,7 +206,7 @@ class HTTP_Upload extends HTTP_Upload_Error
      * @var array
      */
     var $files = array();
-    
+
     /**
      * Whether the files array has already been built or not
      * @var int
@@ -224,7 +224,7 @@ class HTTP_Upload extends HTTP_Upload_Error
     /**
      * Specially used if the naming mode is 'seq'
      * Contains file naming information
-     * 
+     *
      * @var array
      * @access private
      */
@@ -284,16 +284,16 @@ class HTTP_Upload extends HTTP_Upload_Error
      * @return mixed array or object (see @param $file above) or Pear_Error
      * @access public
      */
-    function &getFiles($file = null)
+    function getFiles($file = null)
     {
         //build only once for multiple calls
         if (!$this->is_built) {
-            $files = &$this->_buildFiles();
+            $files = $this->_buildFiles();
             if (PEAR::isError($files)) {
                 // there was an error with the form.
                 // Create a faked upload embedding the error
                 $files_code = $files->getCode();
-                $this->files['_error'] =  &new HTTP_Upload_File(
+                $this->files['_error'] =  new HTTP_Upload_File(
                                                        '_error', null,
                                                        null, null,
                                                        null, $files_code,
@@ -320,7 +320,7 @@ class HTTP_Upload extends HTTP_Upload_Error
             } else {
                 // developer didn't specify this name in the form
                 // warn him about it with a faked upload
-                $huf =&  new HTTP_Upload_File(
+                $huf =  new HTTP_Upload_File(
                                              '_error', null,
                                              null, null,
                                              null, 'DEV_NO_DEF_FILE',
@@ -336,13 +336,13 @@ class HTTP_Upload extends HTTP_Upload_Error
      *
      * @return array of HTTP_Upload_File objects for every file
      */
-    function &_buildFiles()
+    function _buildFiles()
     {
         // Form method check
         if (!isset($this->content_type) ||
             strpos($this->content_type, 'multipart/form-data') !== 0)
         {
-            $error =& $this->raiseError('BAD_FORM');
+            $error = $this->raiseError('BAD_FORM');
             return $error;
         }
         // In 4.1 $_FILES isn't initialized when no uploads
@@ -418,7 +418,7 @@ class HTTP_Upload extends HTTP_Upload_Error
     function isMissing()
     {
         if (count($this->post_files) < 1) {
-            $error =& $this->raiseError('NO_USER_FILE');
+            $error = $this->raiseError('NO_USER_FILE');
             return $error;
         }
         //we also check if at least one file has more than 0 bytes :)
@@ -437,7 +437,7 @@ class HTTP_Upload extends HTTP_Upload_Error
             }
         }
         if ($error !== null && $error != 2 && $size == 0) {
-            $error =& $this->raiseError('NO_USER_FILE');
+            $error = $this->raiseError('NO_USER_FILE');
             return $error;
         }
         return false;
@@ -446,7 +446,7 @@ class HTTP_Upload extends HTTP_Upload_Error
     /**
      * Sets the chmod to be used for uploaded files
      *
-     * @param int Desired mode 
+     * @param int Desired mode
      */
     function setChmod($mode)
     {
@@ -643,15 +643,15 @@ class HTTP_Upload_File extends HTTP_Upload_Error
             //here's the pattern we're looking for
             $pattern = '/(\[)([[:digit:]]+)(\])$/';
 
-            //just incase the original filename had a sequence, we take it out 
+            //just incase the original filename had a sequence, we take it out
             // e.g: 'userGuide[3]' should become 'userGuide'
             $basename =  preg_replace($pattern, '', $basename);
-        	
+
             /*
              * attempt to find a unique sequence file name
              */
             $i = 1;
-        	
+
             while (true) {
                 $filename = $basename . '[' . $i . '].' . $this->upload['ext'];
                 $check = $dir . DIRECTORY_SEPARATOR . $filename;
@@ -683,7 +683,7 @@ class HTTP_Upload_File extends HTTP_Upload_Error
      */
     function nameToSafe($name, $maxlen=250)
     {
-        $noalpha = 'ÁÉÍÓÚÝáéíóúýÂÊÎÔÛâêîôûÀÈÌÒÙàèìòùÄËÏÖÜäëïöüÿÃãÕõÅåÑñÇç@°ºªÞþÆæ';
+        $noalpha = 'ÃÃ‰ÃÃ“ÃšÃÃ¡Ã©Ã­Ã³ÃºÃ½Ã‚ÃŠÃŽÃ”Ã›Ã¢ÃªÃ®Ã´Ã»Ã€ÃˆÃŒÃ’Ã™Ã Ã¨Ã¬Ã²Ã¹Ã„Ã‹ÃÃ–ÃœÃ¤Ã«Ã¯Ã¶Ã¼Ã¿ÃƒÃ£Ã•ÃµÃ…Ã¥Ã‘Ã±Ã‡Ã§@Â°ÂºÂªÃžÃ¾Ã†Ã¦';
         $alpha   = 'AEIOUYaeiouyAEIOUaeiouAEIOUaeiouAEIOUaeiouyAaOoAaNnCcaooaTtAa';
 
         $name = substr($name, 0, $maxlen);
@@ -746,19 +746,19 @@ class HTTP_Upload_File extends HTTP_Upload_Error
     function moveTo($dir, $overwrite = true)
     {
         if (!$this->isValid()) {
-            $error =& $this->raiseError($this->upload['error']);
+            $error = $this->raiseError($this->upload['error']);
             return $error;
         }
 
         //Valid extensions check
         if (!$this->_evalValidExtensions()) {
-            $error =& $this->raiseError('NOT_ALLOWED_EXTENSION');
+            $error = $this->raiseError('NOT_ALLOWED_EXTENSION');
             return $error;
         }
 
         $err_code = $this->_chkDirDest($dir);
         if ($err_code !== false) {
-            $error =& $this->raiseError($err_code);
+            $error = $this->raiseError($err_code);
             return $error;
         }
         // Use 'safe' mode by default if no other was selected
@@ -775,21 +775,21 @@ class HTTP_Upload_File extends HTTP_Upload_Error
 
         if (@is_file($name)) {
             if ($overwrite !== true) {
-                $error =& $this->raiseError('FILE_EXISTS');
+                $error = $this->raiseError('FILE_EXISTS');
                 return $error;
             } elseif (!is_writable($name)) {
-                $error =& $this->raiseError('CANNOT_OVERWRITE');
+                $error = $this->raiseError('CANNOT_OVERWRITE');
                 return $error;
             }
         }
 
         // copy the file and let php clean the tmp
         if (!@move_uploaded_file($this->upload['tmp_name'], $name)) {
-            $error =& $this->raiseError('E_FAIL_MOVE');
-            return $error; 
+            $error = $this->raiseError('E_FAIL_MOVE');
+            return $error;
         }
         @chmod($name, $this->_chmod);
-        $prop =& $this->getProp('name');
+        $prop = $this->getProp('name');
         return $prop;
     }
 
