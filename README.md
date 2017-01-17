@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/pear/HTTP_Upload.svg?branch=master)](https://travis-ci.org/pear/HTTP_Upload)
+
 This package is http://pear.php.net/package/HTTP_Upload and has been migrated from http://svn.php.net/repository/pear/packages/HTTP_Upload
 
 Please report all new issues via the PEAR bug tracker.
