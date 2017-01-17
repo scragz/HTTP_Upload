@@ -31,8 +31,8 @@ from html forms. Features:
   <active>no</active>
  </lead>
 
- <date>2017-01-12</date>
- <time>15:30:00</time>
+ <date>2017-01-17</date>
+ <time>09:20:00</time>
 
  <version>
   <release>1.0.0b4</release>
@@ -44,7 +44,7 @@ from html forms. Features:
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-  QA release (pre-release)
+  QA release
   
   BC break: classes split into separate files, PHP5 visibility added
   
@@ -73,6 +73,7 @@ from html forms. Features:
    <file baseinstalldir="/" name="tests/toolarge-1.phpt" role="test" />
    <file baseinstalldir="/" name="tests/toolarge-2.phpt" role="test" />
    <file baseinstalldir="/" name="tests/toolarge-3.phpt" role="test" />
+   <file baseinstalldir="/" name="tests/validateMultiExtensions.phpt" role="test" />
    <file baseinstalldir="/" name="tests/validatingExtensions.phpt" role="test" />
    <file baseinstalldir="/" name="tests/files/10b" role="test" />
    <file baseinstalldir="/" name="tests/files/10b.exe" role="test" />
@@ -108,10 +109,10 @@ from html forms. Features:
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2017-01-12</date>
+   <date>2017-01-17</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
    <notes>
-    QA release (pre-release)
+    QA release
     
     BC break: classes split into separate files, PHP5 visibility added
     

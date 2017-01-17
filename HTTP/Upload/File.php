@@ -243,7 +243,7 @@ class HTTP_Upload_File extends HTTP_Upload_Error
      */
     public function nameToSafe($name, $maxlen=250)
     {
-        $noalpha = '�����������������������������������������������������@�������';
+        $noalpha = 'ÁÉÍÓÚÝáéíóúýÂÊÎÔÛâêîôûÀÈÌÒÙàèìòùÄËÏÖÜäëïöüÿÃãÕõÅåÑñÇç@°ºªÞþÆæ';
         $alpha   = 'AEIOUYaeiouyAEIOUaeiouAEIOUaeiouAEIOUaeiouyAaOoAaNnCcaooaTtAa';
 
         $name = substr($name, 0, $maxlen);
