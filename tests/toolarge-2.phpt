@@ -27,7 +27,7 @@ Warning: POST Content-Length of 338 bytes exceeds the limit of 5 bytes in Unknow
 Valid: bool(false)
 Missing: bool(false)
 Error: bool(true)
-array(8) {
+array(9) {
   ["real"]=>
   string(6) "_error"
   ["name"]=>
@@ -44,4 +44,7 @@ array(8) {
   NULL
   ["error"]=>
   string(9) "TOO_LARGE"
+  ["extra_ext"]=>
+  array(0) {
+  }
 }
