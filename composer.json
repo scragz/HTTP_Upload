@@ -40,8 +40,5 @@
     ],
     "require": {
         "pear-pear.php.net/PEAR": "v1.10.1"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "@stable"
     }
 }
