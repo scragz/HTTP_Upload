@@ -23,7 +23,12 @@
     },
     "description": "More info available on: http://pear.php.net/package/HTTP_Upload",
     "include-path": [
-        "./"
+        "./",
+        "./vendor/pear-pear.php.net/Archive_Tar",
+        "./vendor/pear-pear.php.net/Console_Getopt",
+        "./vendor/pear-pear.php.net/PEAR",
+        "./vendor/pear-pear.php.net/Structures_Graph",
+        "./vendor/pear-pear.php.net/XML_Util"
     ],
     "license": "LGPL",
     "name": "pear/http_upload",
