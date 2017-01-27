@@ -3,3 +3,11 @@ composer.lock
 composer.phar
 vendor
 /dist
+
+# eclipse related
+.buildpath
+.project
+.settings
+
+# package tarball
+*.tgz
