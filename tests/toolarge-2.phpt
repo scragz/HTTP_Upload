@@ -1,5 +1,6 @@
 --TEST--
 Uploaded file is too large (post_max_size)
+--CGI--
 --INI--
 post_max_size=5
 --POST--

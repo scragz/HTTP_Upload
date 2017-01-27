@@ -1,5 +1,6 @@
 --TEST--
 Upload a file and rename it before moving
+--CGI--
 --UPLOAD--
 userfile=files/10b
 --FILE--

@@ -1,5 +1,6 @@
 --TEST--
 test a normal file upload that succeeds
+--CGI--
 --UPLOAD--
 userfile=files/10b
 --FILE--
