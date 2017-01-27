@@ -8,6 +8,6 @@ script:
   - pear channel-update pear.php.net
   - pear upgrade pear/pear-1.10.1
   - pear install package.xml
-  - pear run-tests tests/ || (for i in `ls tests/*.diff`; do echo $i; cat $i; done && exit 1)
+  - pear run-tests --showdiff -r tests
   - pear package
   - composer install
