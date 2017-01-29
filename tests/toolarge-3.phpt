@@ -1,5 +1,6 @@
 --TEST--
 Uploaded file is too large (upload_max_filesize)
+--CGI--
 --INI--
 upload_max_filesize=5
 --POST--
@@ -12,6 +13,7 @@ error_reporting(E_ALL ^ E_STRICT);
 if (file_exists('vendor/autoload.php')) {
     require_once 'vendor/autoload.php';
 } else {
+    set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/../');
     require_once 'HTTP/Upload.php';
 }
 $up = new HTTP_Upload();
