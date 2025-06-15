@@ -21,7 +21,7 @@
             "HTTP": "./"
         }
     },
-    "description": "More info available on: http://pear.php.net/package/HTTP_Upload",
+    "description": "Modernised fork of PEAR HTTP_Upload, PHP 8 compatible",
     "include-path": [
         "./",
         "./vendor/pear-pear.php.net/Archive_Tar",
@@ -31,7 +31,7 @@
         "./vendor/pear-pear.php.net/XML_Util"
     ],
     "license": "LGPL",
-    "name": "pear/http_upload",
+    "name": "scragz/http_upload",
     "support": {
         "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=HTTP_Upload",
         "source": "https://github.com/pear/HTTP_Upload"
@@ -43,7 +43,5 @@
             "url": "https://pear.php.net"
         }
     ],
-    "require": {
-        "pear-pear.php.net/PEAR": "v1.10.1"
-    }
+    "require": { "php": "^8.0" }
 }
